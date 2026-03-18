@@ -1,0 +1,79 @@
+{
+  "manifest_version": 3,
+  "name": "SlackGuard \u2014 Is Your Boss Watching?",
+  "version": "1.0.3",
+  "description": "Instantly shows whether your Slack workspace admin can read your DMs and private messages.",
+  "permissions": [
+    "storage",
+    "notifications",
+    "webNavigation",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://*.slack.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.slack.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*"
+      ],
+      "matches": [
+        "https://*.slack.com/*"
+      ]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "slackguard@savepointcandles.dev",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ],
+        "optional": []
+      }
+    }
+  },
+  "commands": {
+    "toggle-stealth": {
+      "suggested_key": {
+        "default": "Alt+Shift+H",
+        "mac": "Command+Shift+H"
+      },
+      "description": "Instantly hide or show the SlackGuard privacy banner (stealth mode)"
+    }
+  }
+}

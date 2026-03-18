@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { width:300px; padding:16px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:#f8f8f8; margin:0; }
+    .header { display:flex; align-items:center; gap:8px; margin-bottom:16px; }
+    .logo { font-weight:bold; color:#4a154b; font-size:16px; }
+    .version { font-size:11px; color:#aaa; margin-left:auto; }
+    .status-card { background:white; border-radius:8px; padding:12px; box-shadow:0 1px 3px rgba(0,0,0,0.1); border-left:4px solid #ccc; }
+    .status-card.high   { border-left-color:#E01E5A; }
+    .status-card.medium { border-left-color:#ECB22E; }
+    .status-card.low    { border-left-color:#2EB67D; }
+    .risk-title { font-weight:bold; margin-bottom:4px; display:block; font-size:14px; }
+    .risk-title.high   { color:#E01E5A; }
+    .risk-title.medium { color:#c8960a; }
+    .risk-title.low    { color:#1a8a57; }
+    .risk-title.unknown { color:#999; }
+    .risk-sub { font-size:12px; color:#555; margin-top:4px; line-height:1.4; display:block; }
+    .reason-list { margin:8px 0 0 0; padding-left:18px; font-size:12px; color:#444; }
+    .reason-list li { margin-bottom:4px; }
+    .plan-badge { display:inline-block; font-size:10px; padding:2px 7px; border-radius:20px; margin-top:6px; background:#f0eaf0; color:#4a154b; font-weight:600; }
+    .tips { margin-top:10px; background:white; border-radius:8px; padding:10px 12px; box-shadow:0 1px 3px rgba(0,0,0,0.08); }
+    .tips-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:#888; margin-bottom:6px; }
+    .tips ul { margin:0; padding-left:16px; }
+    .tips li { font-size:11px; color:#555; margin-bottom:3px; line-height:1.4; }
+    .stealth-info { margin-top:10px; background:#f0eaf0; border-radius:6px; padding:8px 10px; font-size:11px; color:#555; line-height:1.5; }
+    .stealth-info strong { color:#4a154b; }
+    .footer { margin-top:10px; display:flex; justify-content:space-between; gap:5px; }
+    button { flex:1; background:#fff; border:1px solid #ddd; padding:7px 4px; border-radius:4px; font-size:11px; cursor:pointer; transition:background 0.15s; white-space:nowrap; }
+    button:hover { background:#f0f0f0; }
+    button.primary { background:#4a154b; color:white; border-color:#4a154b; }
+    button.primary:hover { background:#611f64; }
+    .last-checked { font-size:10px; color:#aaa; text-align:center; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="logo">SlackGuard</span>
+    <span class="version">v1.0.3</span>
+  </div>
+  <div id="status-container" class="status-card unknown">
+    <span class="risk-title unknown" id="risk-text">Scanning...</span>
+    <span class="risk-sub" id="risk-sub"></span>
+    <span class="plan-badge" id="plan-badge" style="display:none"></span>
+    <ul class="reason-list" id="reasons"></ul>
+  </div>
+  <div class="tips">
+    <div class="tips-title">Protect yourself</div>
+    <ul>
+      <li><strong>Never</strong> discuss job searches, salary, or complaints on Slack</li>
+      <li><strong>Use</strong> Signal or WhatsApp for truly private chats</li>
+      <li><strong>Check</strong> slack.com/account/workspace-settings</li>
+    </ul>
+  </div>
+  <div class="stealth-info">
+    <strong>Stealth mode:</strong> Alt+Shift+H (Mac: Cmd+Shift+H)<br>
+    Instantly hides the banner during screen shares or if someone walks by.
+  </div>
+  <div class="footer">
+    <button id="btn-rescan">Re-scan</button>
+    <button id="btn-show-banner">Restore</button>
+    <button id="btn-stealth">Hide</button>
+    <button class="primary" id="btn-settings">Settings</button>
+  </div>
+  <div class="last-checked" id="last-checked"></div>
+  <script src="popup.js"></script>
+</body>
+</html>
